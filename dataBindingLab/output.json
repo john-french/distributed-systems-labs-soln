@@ -1,0 +1,15 @@
+{
+  "name" : "Fraport Bookstore",
+  "location" : "Frankfurt Airport",
+  "booksList" : [ {
+    "name" : "The Game",
+    "author" : "Neil Strauss",
+    "publisher" : "Harpercollins",
+    "isbn" : "978-0060554736"
+  }, {
+    "name" : "Feuchtgebiete",
+    "author" : "Charlotte Roche",
+    "publisher" : "Dumont Buchverlag",
+    "isbn" : "978-3832180577"
+  } ]
+}

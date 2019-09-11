@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="ie.gmit.ds" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:import schemaLocation="schema2.xsd"/>
+
+  <xs:element name="bookStore" type="bookStore"/>
+
+</xs:schema>
+
