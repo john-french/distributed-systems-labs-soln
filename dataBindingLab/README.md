@@ -1,19 +1,6 @@
-# Distributed Systems
+# Distributed Systems Labs
 ## Data Binding: Text-Based Formats
-- Book example from https://www.vogella.com/tutorials/JAXB/article.html
 
-- Initial project with plain classes
-- Add jaxb api import
-- Add XML annotations
-- run example
-    - fails: no implementation
-- Add jaxb implementation
-
-- Repeat for json
-- Repeat for yaml
-- use xjc to create classes based on schema?
-
-## Lab
 ### Overview
 Java Architecture for XML Binding (JAXB) is a Java standard that defines how Java objects are converted from and to XML. It uses a standard set of mappings.
 
