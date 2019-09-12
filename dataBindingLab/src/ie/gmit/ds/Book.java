@@ -1,13 +1,18 @@
 package ie.gmit.ds;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "book")
+@JsonRootName(value="book")
 // If you want you can define the order in which the fields are written
 // Optional
 @XmlType(propOrder = { "author", "name", "publisher", "isbn" })
+@JsonPropertyOrder({ "author", "name", "publisher", "isbn" })
 public class Book {
 
     private String name;

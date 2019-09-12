@@ -1,6 +1,5 @@
 package ie.gmit.ds;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -12,11 +11,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-
-import ie.gmit.ds.Book;
-import ie.gmit.ds.BookStore;
 
 public class BookMain {
 
@@ -60,6 +57,7 @@ public class BookMain {
 
 		// Object to JSON
 		ObjectMapper jsonMarshaller = new ObjectMapper();
+		jsonMarshaller.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
 		String jsonBookStore = jsonMarshaller.writerWithDefaultPrettyPrinter().writeValueAsString(bookstore);
 		System.out.println(jsonBookStore);
 		FileWriter fileWriter = new FileWriter("./bookstore.json");
