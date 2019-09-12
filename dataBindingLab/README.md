@@ -40,7 +40,8 @@ The project contains three java classes
     - `BookStore.java`: a simple POJO representing a book store, with 2 `String` fields and a book list contained in an `ArrayList`
     - `BookMain.java`: a test class with a `main` method; used to run the data marshalling/unmarshalling operations.
 
-#### Get the JAXB Dependencies
+#### Marshal Objects to XML
+##### Get the JAXB Dependencies
 - In order to use JAXB to manage our data, we'll need to add the necessary libraries to our project. This is because we're using a recent version of Java. JAXB was part of the Java SE library up until Java 8, but was deprecated in Java SE 9 and 10, and removed entirely in Java SE 11.
 
 - To include the official JAXB API dependency, add the following inside the `<dependencies>` section of your pom.xml:
@@ -60,14 +61,15 @@ The project contains three java classes
         <scope>runtime</scope>
     </dependency>
 ```
-#### Annotate Classes
+##### Annotate Classes
 - Now that we have JAXB available, we can use it to annotate our classes so that they can be parsed to/from XML.
-- Add the following imports and annotations in the appropriate places in the `Book` class:
+- Add the following imports to the `Book` class:
     ```
     import javax.xml.bind.annotation.XmlElement;
     import javax.xml.bind.annotation.XmlRootElement;
     import javax.xml.bind.annotation.XmlType;
     ```
+- JAXB gives us control over how the data is marshalled using annotations. Try this out by adding the following annotations at the relevant places in the `Book` class:    
     ```
     @XmlRootElement(name = "book")
     // Optionally, can also define the order in which the fields are written
@@ -93,7 +95,7 @@ The project contains three java classes
     @XmlElement(name = "book")
     private ArrayList<Book> bookList;
     ```
-#### Marshal Objects to XML
+##### Write to XML file
 - Now we're ready to get marshalling! In the `BookMain` class, create the JAXB context and instantiate the marshaller.
     ```
     JAXBContext context = JAXBContext.newInstance(BookStore.class);
@@ -107,3 +109,58 @@ The project contains three java classes
     // Write to File
     jaxbMarshaller.marshal(bookstore, new File("./bookstore-jaxb.xml"));
     ```
+- Open the file bookstore-jaxb.xml and verify that it contains an xml representation of the `BookStore` data objects and the `Book` objects that it references.
+
+#### Marshal Objects to JSON
+##### Get the Jackson Dependencies
+[Jackson](https://github.com/FasterXML/jackson) is one of the most popular libraries for JSON parsing in Java. To use it, add the following dependency to the `pom.xml`:
+    ```
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>
+    </dependency>    
+    ```
+##### Annotate Classes
+Similar to JAXB, Jackson also gives us control over how our objects are represented in JSON. Add the following imports and Jackson annotations to the `Book` class:
+```
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonRootName;
+```
+
+```
+@XmlRootElement(name = "book")
+@JsonRootName(value="book")
+// If you want you can define the order in which the fields are written
+// Optional
+@XmlType(propOrder = { "author", "name", "publisher", "isbn" })
+@JsonPropertyOrder({ "author", "name", "publisher", "isbn" })
+public class Book {
+
+```
+- Add the following imports and Jackson annotations to the `Bookstore` class:
+```
+
+``` 
+##### Write to JSON file
+- In order to map an object to/from JSON, we need an instance of the Jackson class `ObjectMapper`:
+```
+		// Object to JSON
+		ObjectMapper jsonMarshaller = new ObjectMapper();
+		jsonMarshaller.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
+		String jsonBookStore = jsonMarshaller.writeValueAsString(bookstore);
+		System.out.println(jsonBookStore);
+		FileWriter fileWriter = new FileWriter("./bookstore.json");
+		fileWriter.write(jsonBookStore);
+		fileWriter.close();
+```		 
+- Open the file `bookstore.json`. It's all printed on one line, which isn't great for human-readability. It would be nice if it could be printed....pretty. Let's use the pretty printer!
+```
+    String jsonBookStore = jsonMarshaller.writerWithDefaultPrettyPrinter().writeValueAsString(bookstore);
+```
+#### Marshal Objects to YAML
+
+#### Unmarshal from XML
+
+#### Unmarshal from JSON and YAML

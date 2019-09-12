@@ -1,5 +1,6 @@
 package ie.gmit.ds;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -23,6 +24,7 @@ public class Book {
     // If you like the variable name, e.g. "name", you can easily change this
     // name for your XML-Output:
     @XmlElement(name = "title")
+//    @JsonProperty("title")
     public String getName() {
         return name;
     }
