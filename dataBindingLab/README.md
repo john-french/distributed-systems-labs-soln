@@ -1,23 +1,8 @@
-# Distributed Systems Labs
-## Data Binding: Text-Based Formats
-
+# GMIT Distributed Systems
+## Lab 1: Data Binding with Text-Based Formats
 ### Overview
-Java Architecture for XML Binding (JAXB) is a Java standard that defines how Java objects are converted from and to XML. It uses a standard set of mappings.
-
-JAXB defines an API for reading and writing Java objects to and from XML documents.
-As JAXB is defined via a specification, it is possible to use different implementations for this standard. JAXB defines a service provider which allows the selection of the JAXB implementation.
-
-It applies a lot of defaults thus making reading and writing of XML via Java relatively easy.
-
-### JAXB 2: Java Architecture for XML Binding
-JAXB uses annotations to indicate the central elements.
-
-
-| Annotation | Description |
-| --------- | ---------- |
-| ``@XmlRootElement(namespace = "namespace")``  |  Define the root element for an XML tree |
-| `XmlType(propOrder = { "field2", "field1",.. })`  |  Allows us to define the order in which the fields are written in the XML file |
-| `@XmlElement(name = "newName")`  |  Define the XML element which will be used. Only need to be used if the newName is different than the Java class name |
+In this lab we'll explore data binding using text-based formats, XML, JSON and YAML. We'll use the main Java libraries for XML and JSON processing, [JAXB](https://github.com/eclipse-ee4j/jaxb-ri) and [Jackson](https://github.com/FasterXML/jackson).
+We'll use these libraries to serialise data to and from formatted text files, and we'll look some of the many annotations they provide which can give you fine-grained control over how the conversion process is handled.
 
 ### Lab Procedure
 #### Project Import
@@ -126,28 +111,34 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class Book {
 
 ```
-- Add the following imports and Jackson annotations to the `Bookstore` class:
-```
 
-``` 
 ##### Write to JSON file
 - In order to map an object to/from JSON, we need an instance of the Jackson class `ObjectMapper`:
 ```
-		// Object to JSON
-		ObjectMapper jsonMarshaller = new ObjectMapper();
-		jsonMarshaller.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
-		String jsonBookStore = jsonMarshaller.writeValueAsString(bookstore);
-		System.out.println(jsonBookStore);
-		FileWriter fileWriter = new FileWriter("./bookstore.json");
-		fileWriter.write(jsonBookStore);
-		fileWriter.close();
+// Object to JSON
+ObjectMapper jsonMarshaller = new ObjectMapper();
+jsonMarshaller.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
+String jsonBookStore = jsonMarshaller.writeValueAsString(bookstore);
+System.out.println(jsonBookStore);
+FileWriter fileWriter = new FileWriter("./bookstore.json");
+fileWriter.write(jsonBookStore);
+fileWriter.close();
 ```		 
 - Open the file `bookstore.json`. It's all printed on one line, which isn't great for human-readability. It would be nice if it could be printed....pretty. Let's use the pretty printer!
 ```
     String jsonBookStore = jsonMarshaller.writerWithDefaultPrettyPrinter().writeValueAsString(bookstore);
 ```
-#### Marshal Objects to YAML
+- Now `bookstore.json` should look more readable.
 
 #### Unmarshal from XML
+- Now lets do the reverse: unmarshalling XML back to Java objects. We can use the XML output from earlier, and we'lll need to create a JAXB `Unmarshaller`:
+```
+		Unmarshaller jaxbUnmarshaller = context.createUnmarshaller();
+		BookStore bookstore2 = (BookStore) jaxbUnmarshaller.unmarshal(new FileReader(BOOKSTORE_XML));
+```		 
+- `bookstore2` should be a fully reconstructed copy of our original `bookstore`. Iterate through the booklist in `bookstore2` and print out the book titles to verify this.
 
-#### Unmarshal from JSON and YAML
+#### Unmarshal from JSON
+- You're on your own for this final part. Create 2 data files, one JSON and one YAML each containing a single book in JSON/YAML format (e.g. book1.json, book2.yaml). Using Jackson, parse these two data files and unmarshal them to two new `Book` objects, then add these new objects to the `BookStore`s booklist. Write this updated `BookStore` out to an XML file, and note that the two new books have been added. Find resources on the internet to help you to do this.
+- This shows that we can freely convert data between these formats. Instead of reading/writing from/to a file, we could just as easily be receiving/sending the data across a network connection, the marshalling/unmarshalling process is the same.
+  
