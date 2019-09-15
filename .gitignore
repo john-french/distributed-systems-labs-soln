@@ -1,0 +1,8 @@
+.idea
+*/.idea/
+*/bin
+*/local.properties
+*/.settings/
+*/.classpath
+*/.project
+*/target
