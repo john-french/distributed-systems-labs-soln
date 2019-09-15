@@ -75,8 +75,8 @@ public class BookMain {
 		// get variables from our xml file, created before
 		System.out.println();
 		System.out.println("Output from our XML File: ");
-		Unmarshaller um = context.createUnmarshaller();
-		BookStore bookstore2 = (BookStore) um.unmarshal(new FileReader(BOOKSTORE_XML));
+		Unmarshaller jaxbUnmarshaller = context.createUnmarshaller();
+		BookStore bookstore2 = (BookStore) jaxbUnmarshaller.unmarshal(new FileReader(BOOKSTORE_XML));
 		ArrayList<Book> list = bookstore2.getBooksList();
 		for (Book book : list) {
 			System.out.println("Book: " + book.getName() + " from " + book.getAuthor());
