@@ -25,23 +25,23 @@ public class BookMain {
 
 		// create books
 		Book book1 = new Book();
-		book1.setIsbn("978-0060554736");
-		book1.setName("The Game");
-		book1.setAuthor("Neil Strauss");
-		book1.setPublisher("Harpercollins");
+		book1.setIsbn("9780099512158");
+		book1.setName("The Leopard");
+		book1.setAuthor("Giuseppe Tomasi De Lampedusa");
+		book1.setPublisher("Vintage Classics");
 		bookList.add(book1);
 
 		Book book2 = new Book();
-		book2.setIsbn("978-3832180577");
-		book2.setName("Feuchtgebiete");
-		book2.setAuthor("Charlotte Roche");
-		book2.setPublisher("Dumont Buchverlag");
+		book2.setIsbn("978-0-6796-4019-6");
+		book2.setName("Shadow Country");
+		book2.setAuthor("Peter Matthiessen");
+		book2.setPublisher("Random House");
 		bookList.add(book2);
 
 		// create bookstore, assigning book
 		BookStore bookstore = new BookStore();
-		bookstore.setName("Fraport Bookstore");
-		bookstore.setLocation("Frankfurt Airport");
+		bookstore.setName("Charlie Byrne's");
+		bookstore.setLocation("Galway");
 		bookstore.setBookList(bookList);
 
 		// create JAXB context and instantiate marshaller
