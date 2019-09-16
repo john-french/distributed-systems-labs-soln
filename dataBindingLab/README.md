@@ -86,13 +86,13 @@ The project contains three java classes
 #### Marshal Objects to JSON
 ##### Get the Jackson Dependencies
 [Jackson](https://github.com/FasterXML/jackson) is one of the most popular libraries for JSON parsing in Java. To use it, add the following dependency to the `pom.xml`:
-    ```
-    <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-        <version>
-    </dependency>    
-    ```
+```
+	<dependency>
+	<groupId>com.fasterxml.jackson.core</groupId>
+	<artifactId>jackson-databind</artifactId>
+	<version>
+	</dependency>    
+```
 ##### Annotate Classes
 Similar to JAXB, Jackson also gives us control over how our objects are represented in JSON. Add the following imports and Jackson annotations to the `Book` class:
 ```
@@ -109,7 +109,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 @XmlType(propOrder = { "author", "name", "publisher", "isbn" })
 @JsonPropertyOrder({ "author", "name", "publisher", "isbn" })
 public class Book {
-
 ```
 
 ##### Write to JSON file
@@ -123,7 +122,8 @@ System.out.println(jsonBookStore);
 FileWriter fileWriter = new FileWriter("./bookstore.json");
 fileWriter.write(jsonBookStore);
 fileWriter.close();
-```		 
+```	
+
 - Open the file `bookstore.json`. It's all printed on one line, which isn't great for human-readability. It would be nice if it could be printed....pretty. Let's use the pretty printer!
 ```
     String jsonBookStore = jsonMarshaller.writerWithDefaultPrettyPrinter().writeValueAsString(bookstore);
@@ -133,12 +133,15 @@ fileWriter.close();
 #### Unmarshal from XML
 - Now lets do the reverse: unmarshalling XML back to Java objects. We can use the XML output from earlier, and we'lll need to create a JAXB `Unmarshaller`:
 ```
-		Unmarshaller jaxbUnmarshaller = context.createUnmarshaller();
-		BookStore bookstore2 = (BookStore) jaxbUnmarshaller.unmarshal(new FileReader(BOOKSTORE_XML));
+Unmarshaller jaxbUnmarshaller = context.createUnmarshaller();
+BookStore bookstore2 = (BookStore) jaxbUnmarshaller.unmarshal(new FileReader(BOOKSTORE_XML));
 ```		 
 - `bookstore2` should be a fully reconstructed copy of our original `bookstore`. Iterate through the booklist in `bookstore2` and print out the book titles to verify this.
 
 #### Unmarshal from JSON
 - You're on your own for this final part. Create 2 data files, one JSON and one YAML each containing a single book in JSON/YAML format (e.g. book1.json, book2.yaml). Using Jackson, parse these two data files and unmarshal them to two new `Book` objects, then add these new objects to the `BookStore`s booklist. Write this updated `BookStore` out to an XML file, and note that the two new books have been added. Find resources on the internet to help you to do this.
 - This shows that we can freely convert data between these formats. Instead of reading/writing from/to a file, we could just as easily be receiving/sending the data across a network connection, the marshalling/unmarshalling process is the same.
-  
+
+
+
+_Lab adapted from content developed by John Healy and vogella.com_
