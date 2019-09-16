@@ -6,7 +6,7 @@ We'll use these libraries to serialise data to and from formatted text files, an
 
 ### Lab Procedure
 #### Project Import
-- Import the project `dataBindingLab` into your IDE.
+- Clone this repository, and import the project `dataBindingLab` into your IDE.
 The project contains three java classes
     - `Book.java`: a simple POJO representing a book, with 4 `String` fields.
     - `BookStore.java`: a simple POJO representing a book store, with 2 `String` fields and a book list contained in an `ArrayList`
