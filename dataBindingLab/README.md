@@ -41,7 +41,7 @@ The project contains three java classes
     import javax.xml.bind.annotation.XmlRootElement;
     import javax.xml.bind.annotation.XmlType;
     ```
-- JAXB gives us control over how the data is marshalled using annotations. Try this out by adding the following annotations at the relevant places in the `Book` class:    
+- JAXB gives us control over how the data is marshalled using annotations. Full details on the available JAXB annoations are available in the [user's guide](https://javaee.github.io/jaxb-v2/doc/user-guide/release-documentation.html#users-guide). Try out some annotations by adding them at the relevant places in the `Book` class:    
     ```
     @XmlRootElement(name = "book")
     // Optionally, can also define the order in which the fields are written
@@ -67,6 +67,8 @@ The project contains three java classes
     @XmlElement(name = "book")
     private ArrayList<Book> bookList;
     ```
+- What do these annotations do? Find out by experimenting with them and referring to the JAXB [user's guide](https://javaee.github.io/jaxb-v2/doc/user-guide/release-documentation.html#users-guide).
+
 ##### Write to XML file
 - Now we're ready to get marshalling! In the `BookMain` class, create the JAXB context and instantiate the marshaller.
     ```
@@ -94,7 +96,7 @@ The project contains three java classes
 	</dependency>    
 ```
 ##### Annotate Classes
-Similar to JAXB, Jackson also gives us control over how our objects are represented in JSON. Add the following imports and Jackson annotations to the `Book` class:
+Similar to JAXB, Jackson also gives us control over how our objects are represented in JSON. Jackson annotations are described in the library's [documentation](https://github.com/FasterXML/jackson-docs/wiki/JacksonAnnotations). Add the following imports and Jackson annotations to the `Book` class:
 ```
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -140,7 +142,9 @@ BookStore bookstore2 = (BookStore) jaxbUnmarshaller.unmarshal(new FileReader(BOO
 
 #### Unmarshal from JSON
 - You're on your own for this final part. Create 2 data files, one JSON and one YAML each containing a single book in JSON/YAML format (e.g. book1.json, book2.yaml). Using Jackson, parse these two data files and unmarshal them to two new `Book` objects, then add these new objects to the `BookStore`s booklist. Write this updated `BookStore` out to an XML file, and note that the two new books have been added. Find resources on the internet to help you to do this.
-- This shows that we can freely convert data between these formats. Instead of reading/writing from/to a file, we could just as easily be receiving/sending the data across a network connection, the marshalling/unmarshalling process is the same.
+
+### Summary
+In this lab we showed how in-program data strcutures (objects) can be freely converted to the main text-based formats (XML, JSON and YAML) and vice-versa, and found out that we can take fine-grained control of this process where necessary using library-specific annotations. Instead of reading/writing from/to a file, we could just as easily be receiving/sending the data across a network connection, the marshalling/unmarshalling process is the same. In future labs we'll use these libraries to handle data in web service APIs.
 
 
 
