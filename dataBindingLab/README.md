@@ -144,7 +144,7 @@ BookStore bookstore2 = (BookStore) jaxbUnmarshaller.unmarshal(new FileReader(BOO
 - You're on your own for this final part. Create 2 data files, one JSON and one YAML each containing a single book in JSON/YAML format (e.g. book1.json, book2.yaml). Using Jackson, parse these two data files and unmarshal them to two new `Book` objects, then add these new objects to the `BookStore`s booklist. Write this updated `BookStore` out to an XML file, and note that the two new books have been added. Find resources on the internet to help you to do this.
 
 ### Summary
-In this lab we showed how in-program data strcutures (objects) can be freely converted to the main text-based formats (XML, JSON and YAML) and vice-versa, and found out that we can take fine-grained control of this process where necessary using library-specific annotations. Instead of reading/writing from/to a file, we could just as easily be receiving/sending the data across a network connection, the marshalling/unmarshalling process is the same. In future labs we'll use these libraries to handle data in web service APIs.
+In this lab we showed how in-program data structures (objects) can be freely converted to the main text-based formats (XML, JSON and YAML) and vice-versa, and found out that we can take fine-grained control of this process where necessary using library-specific annotations. Instead of reading/writing from/to a file, we could just as easily be receiving/sending the data across a network connection, the marshalling/unmarshalling process is the same. In future labs we'll use these libraries to handle data in web service APIs.
 
 
 
