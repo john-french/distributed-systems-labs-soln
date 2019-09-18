@@ -92,7 +92,7 @@ The project contains three java classes
 	<dependency>
 	<groupId>com.fasterxml.jackson.core</groupId>
 	<artifactId>jackson-databind</artifactId>
-	<version>
+	<version>2.9.9.3</version>
 	</dependency>    
 ```
 ##### Annotate Classes
