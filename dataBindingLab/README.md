@@ -90,9 +90,9 @@ The project contains three java classes
 [Jackson](https://github.com/FasterXML/jackson) is one of the most popular libraries for JSON parsing in Java. To use it, add the following dependency to the `pom.xml`:
 ```
 	<dependency>
-	<groupId>com.fasterxml.jackson.core</groupId>
-	<artifactId>jackson-databind</artifactId>
-	<version>2.9.9.3</version>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>
+		<version>2.9.9.3</version>
 	</dependency>    
 ```
 ##### Annotate Classes
