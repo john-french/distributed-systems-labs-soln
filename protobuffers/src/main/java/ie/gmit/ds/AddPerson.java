@@ -31,25 +31,12 @@ class AddPerson {
                 break;
             }
 
-            Person.PhoneNumber.Builder phoneNumber =
-                    Person.PhoneNumber.newBuilder().setNumber(number);
-
-            stdout.print("Is this a mobile, home, or work phone? ");
-            String type = stdin.readLine();
-            if (type.equals("mobile")) {
-                phoneNumber.setType(Person.PhoneType.MOBILE);
-            } else if (type.equals("home")) {
-                phoneNumber.setType(Person.PhoneType.HOME);
-            } else if (type.equals("work")) {
-                phoneNumber.setType(Person.PhoneType.WORK);
-            } else {
-                stdout.println("Unknown phone type.  Using default.");
-            }
-
-            person.addPhones(phoneNumber);
+            // *************************************************************
+            // ADD CODE HERE TO CREATE A PERSON USING THE APPROPRIATE BUILDERS
+            // **************************************************************
         }
 
-        return person.build();
+        return;
     }
 
     // Main function:  Reads the entire address book from a file,
@@ -78,12 +65,9 @@ class AddPerson {
         // Add an address.
         addressBook.addPeople(PromptForAddress(new BufferedReader(new InputStreamReader(System.in)), System.out));
 
-        // Write the new address book back to disk.
-        FileOutputStream output = new FileOutputStream(ADDRESS_BOOK_FILE);
-        try {
-            addressBook.build().writeTo(output);
-        } finally {
-            output.close();
-        }
+
+        // ****************************************
+        // ADD CODE HERE TO WRITE THE ADDRESS BOOK TO THE ADDRESS_BOOK_FILE
+        // ****************************************
     }
 }
